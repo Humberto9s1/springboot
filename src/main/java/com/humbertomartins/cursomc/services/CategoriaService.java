@@ -1,9 +1,11 @@
 package com.humbertomartins.cursomc.services;
 
+import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.humbertomartins.cursomc.domain.Categoria;
 import com.humbertomartins.cursomc.repositories.CategoriaRepository;
@@ -19,6 +21,11 @@ public class CategoriaService {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+	}
+	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return repo.save(obj);
 	}
 	
 }
